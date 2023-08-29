@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PubSub Pattern</title>
+  </head>
+  <body>
+    <h1>PubSub Pattern!</h1>
+    <h2>Counter <span id="total">0</span></h2>
+    <button onclick="pubsub.publish('decrement')">-</button>
+    <button onclick="pubsub.publish('increment')">+</button>
+
+    <script src="pubsub.js"></script>
+    <script>
+      const total = document.querySelector('#total');
+
+      pubsub.subscribe('increment', () => {
+        // increment
+        total.textContent = Number(total.textContent) + 1;
+      });
+      pubsub.subscribe('decrement', () => {
+        // decrement
+        total.textContent = Number(total.textContent) - 1;
+      });
+    </script>
+  </body>
+</html>
