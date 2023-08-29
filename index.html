@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom EventTarget Pattern</title>
+  </head>
+  <body>
+    <h1 style="display: flex; width: 100%; background-color: beige">
+      Custom EventTarget Pattern!
+    </h1>
+    <h2>Counter 1: <span id="total">0</span></h2>
+    <h2>Counter 2: <span id="total2">10</span></h2>
+    <button onclick="handleDecrement()">-</button>
+    <button onclick="handleIncrement()">+</button>
+    <input type="color" value="#696969" oninput="handleRecolor(this.value)" />
+
+    <script src="observer.js"></script>
+    <script>
+      const total = document.querySelector('#total');
+      const total2 = document.querySelector('#total2');
+
+      function decrement(element) {
+        element.textContent = Number(element.textContent) - 1;
+      }
+      function increment(element) {
+        element.textContent = Number(element.textContent) + 1;
+      }
+      function recolor(color) {
+        document.body.style.backgroundColor = color;
+      }
+
+      function handleDecrement() {
+        observable.subscribe(decrement);
+        observable.notify(total);
+        observable.notify(total2);
+        observable.unsubscribe(decrement);
+      }
+      function handleIncrement() {
+        observable.subscribe(increment);
+        observable.notify(total);
+        observable.notify(total2);
+        observable.unsubscribe(increment);
+      }
+      function handleRecolor(color) {
+        observable.subscribe(recolor);
+        observable.notify(color);
+        observable.unsubscribe(recolor);
+      }
+    </script>
+  </body>
+</html>
