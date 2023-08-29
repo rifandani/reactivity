@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Event Pattern</title>
+  </head>
+  <body>
+    <h1>Custom Event Pattern!</h1>
+    <h2>Counter <span id="total">0</span></h2>
+    <button onclick="window.dispatchEvent(new Event('decrement'))">-</button>
+    <button onclick="window.dispatchEvent(new Event('increment'))">+</button>
+    <input
+      type="color"
+      value="#696969"
+      oninput="window.dispatchEvent(new CustomEvent('recolor', {
+      detail: this.value
+    }))"
+    />
+
+    <script>
+      const total = document.querySelector('#total');
+
+      window.addEventListener('decrement', () => {
+        total.textContent = Number(total.textContent) - 1;
+      });
+      window.addEventListener('increment', () => {
+        total.textContent = Number(total.textContent) + 1;
+      });
+      window.addEventListener('recolor', (evt) => {
+        document.body.style.backgroundColor = evt.detail;
+      });
+    </script>
+  </body>
+</html>
