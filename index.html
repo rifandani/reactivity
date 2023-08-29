@@ -4,31 +4,33 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Custom Event Pattern</title>
+    <title>Custom EventTarget Pattern</title>
   </head>
   <body>
-    <h1>Custom Event Pattern!</h1>
+    <h1 style="display: flex; width: 100%; background-color: beige">
+      Custom EventTarget Pattern!
+    </h1>
     <h2>Counter <span id="total">0</span></h2>
-    <button onclick="window.dispatchEvent(new Event('decrement'))">-</button>
-    <button onclick="window.dispatchEvent(new Event('increment'))">+</button>
+    <button onclick="counterInstance.decrement()">-</button>
+    <button onclick="counterInstance.increment()">+</button>
     <input
       type="color"
       value="#696969"
-      oninput="window.dispatchEvent(new CustomEvent('recolor', {
-      detail: this.value
-    }))"
+      oninput="counterInstance.recolor(this.value)"
     />
 
+    <script src="custom-event.js"></script>
     <script>
       const total = document.querySelector('#total');
+      const counterInstance = new Counter();
 
-      window.addEventListener('decrement', () => {
+      counterInstance.subscribe('decrement', () => {
         total.textContent = Number(total.textContent) - 1;
       });
-      window.addEventListener('increment', () => {
+      counterInstance.subscribe('increment', () => {
         total.textContent = Number(total.textContent) + 1;
       });
-      window.addEventListener('recolor', (evt) => {
+      counterInstance.subscribe('recolor', (evt) => {
         document.body.style.backgroundColor = evt.detail;
       });
     </script>
