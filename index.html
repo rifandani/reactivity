@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proxy Pattern</title>
+  </head>
+  <body>
+    <h1 style="display: flex; width: 100%; background-color: beige">
+      Proxy Pattern!
+    </h1>
+    <h2>Price: Rp1.000</h2>
+    <h2>Quantity: <span id="quantity">1</span></h2>
+    <h2>Total: <span id="total">1000</span></h2>
+    <button onclick="decrement()">-</button>
+    <button onclick="increment()">+</button>
+
+    <script src="proxy.js"></script>
+    <script>
+      const quantity = document.querySelector('#quantity');
+      const total = document.querySelector('#total');
+      const product = {
+        price: 1_000,
+        quantity: Number(quantity.textContent),
+        total: Number(total.textContent),
+      };
+      const proxy = createProxy(product);
+
+      function decrement() {
+        proxy.quantity -= 1;
+        quantity.textContent = proxy.quantity;
+        total.textContent = proxy.total;
+      }
+      function increment() {
+        proxy.quantity += 1;
+        quantity.textContent = proxy.quantity;
+        total.textContent = proxy.total;
+      }
+    </script>
+  </body>
+</html>
