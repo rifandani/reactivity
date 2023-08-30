@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Observable Pattern</title>
+  </head>
+  <body>
+    <h1 style="display: flex; width: 100%; background-color: beige">
+      Observable Pattern!
+    </h1>
+    <h2>Counter1: <span id="total">0</span></h2>
+    <h2>Counter2: <span id="total2">10</span></h2>
+    <button onclick="handleDecrement()">-</button>
+    <button onclick="handleIncrement()">+</button>
+
+    <script src="observable.js"></script>
+    <script>
+      const total = document.querySelector('#total');
+      const total2 = document.querySelector('#total2');
+
+      // Create a new observable that emits three values and then completes
+      const observable = new Observable((observer) => {
+        observer.next(total);
+        observer.next(total2);
+
+        try {
+          // let's say some async operation failed here and throws error
+          throw Error('Async Ops Failed');
+        } catch (error) {
+          observer.error(error);
+        }
+
+        observer.complete();
+
+        // Optional: Return a function to handle any cleanup if the observer unsubscribes
+        return () => {
+          console.info('✅ Observer unsubscribed');
+        };
+      });
+
+      // Define an observer with next, error, and complete methods
+      const decrementObserver = {
+        next: (element) => {
+          element.textContent = Number(element.textContent) - 1;
+        },
+        complete: () => console.info('🏁 Decrement Completed'),
+        error: (err) => console.error('🛑 Decrement Error:', err),
+      };
+      const incrementObserver = {
+        next: (element) => {
+          element.textContent = Number(element.textContent) + 1;
+        },
+        complete: () => console.info('🏁 Decrement Completed'),
+        error: (err) => console.error('🛑 Decrement Error:', err),
+      };
+
+      function handleDecrement() {
+        const subscription = observable.subscribe(decrementObserver);
+        subscription.unsubscribe();
+      }
+      function handleIncrement() {
+        const subscription = observable.subscribe(incrementObserver);
+        subscription.unsubscribe();
+      }
+    </script>
+  </body>
+</html>
