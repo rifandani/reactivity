@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Observable Async Pattern</title>
+    <title>Observer Async Pattern</title>
   </head>
   <body>
     <h1 style="display: flex; width: 100%; background-color: beige">
-      Observable Async Pattern!
+      Observer Async Pattern!
     </h1>
     <h2>Counter: <span id="total">1</span></h2>
     <button onclick="handleDecrement()">-</button>
@@ -18,7 +18,7 @@
     <script>
       const total = document.querySelector('#total');
       const total2 = document.querySelector('#total2');
-      const observable = new ObservableAsync();
+      const observer = new ObserverAsync();
 
       async function decrement(element) {
         await sleep(1000);
@@ -30,14 +30,14 @@
       }
 
       function handleDecrement() {
-        observable.subscribe(decrement);
-        observable.notify(total);
-        observable.unsubscribe(decrement);
+        observer.subscribe(decrement);
+        observer.notify(total);
+        observer.unsubscribe(decrement);
       }
       function handleIncrement() {
-        observable.subscribe(increment);
-        observable.notify(total);
-        observable.unsubscribe(increment);
+        observer.subscribe(increment);
+        observer.notify(total);
+        observer.unsubscribe(increment);
       }
     </script>
   </body>

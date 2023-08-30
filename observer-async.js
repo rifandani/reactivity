@@ -10,7 +10,7 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-class ObservableAsync {
+class ObserverAsync {
   constructor() {
     this.observers = [];
   }
