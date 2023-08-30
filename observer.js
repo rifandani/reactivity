@@ -1,8 +1,8 @@
-// Subscribers, which can subscribe to and get notified by the observable object.
+// Subscribers, which can subscribe to and get notified by the observer object.
 const observers = [];
 
-// An observable object, which can be observed by subscribers in order to notify them.
-const observable = Object.freeze({
+// An observer object, which can be observed by subscribers in order to notify them.
+const observer = Object.freeze({
   notify: (data) => observers.forEach((observer) => observer(data)),
   subscribe: (func) => observers.push(func),
   unsubscribe: (func) => {

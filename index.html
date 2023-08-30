@@ -32,21 +32,21 @@
       }
 
       function handleDecrement() {
-        observable.subscribe(decrement);
-        observable.notify(total);
-        observable.notify(total2);
-        observable.unsubscribe(decrement);
+        observer.subscribe(decrement);
+        observer.notify(total);
+        observer.notify(total2);
+        observer.unsubscribe(decrement);
       }
       function handleIncrement() {
-        observable.subscribe(increment);
-        observable.notify(total);
-        observable.notify(total2);
-        observable.unsubscribe(increment);
+        observer.subscribe(increment);
+        observer.notify(total);
+        observer.notify(total2);
+        observer.unsubscribe(increment);
       }
       function handleRecolor(color) {
-        observable.subscribe(recolor);
-        observable.notify(color);
-        observable.unsubscribe(recolor);
+        observer.subscribe(recolor);
+        observer.notify(color);
+        observer.unsubscribe(recolor);
       }
     </script>
   </body>
