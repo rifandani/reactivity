@@ -10,7 +10,8 @@
     <h1 style="display: flex; width: 100%; background-color: beige">
       Observer Async Pattern!
     </h1>
-    <h2>Counter: <span id="total">1</span></h2>
+    <h2>Counter1: <span id="total">0</span></h2>
+    <h2>Counter2: <span id="total2">10</span></h2>
     <button onclick="handleDecrement()">-</button>
     <button onclick="handleIncrement()">+</button>
 
@@ -32,11 +33,13 @@
       function handleDecrement() {
         observer.subscribe(decrement);
         observer.notify(total);
+        observer.notify(total2);
         observer.unsubscribe(decrement);
       }
       function handleIncrement() {
         observer.subscribe(increment);
         observer.notify(total);
+        observer.notify(total2);
         observer.unsubscribe(increment);
       }
     </script>
