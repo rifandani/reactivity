@@ -10,7 +10,7 @@
 const contexts = [];
 
 /**
- * create effect
+ * create and register effects
  *
  * @param {() => void} fn - side effect to run
  */
@@ -27,7 +27,7 @@ function createEffect(fn) {
 }
 
 /**
- * reactive value with getter and setter
+ * create reactive value with getter and setter
  *
  * @template T
  * @typedef {() => T} Getter
@@ -64,4 +64,17 @@ function createSignal(value) {
   };
 
   return [read, write];
+}
+
+/**
+ * create derived state value
+ *
+ * @template T
+ * @param {() => T} fn - derive value computations
+ * @returns {() => T}
+ */
+function createMemo(fn) {
+  const [signal, setSignal] = createSignal();
+  createEffect(() => setSignal(fn()));
+  return signal;
 }
