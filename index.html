@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solidjs Pattern</title>
+  </head>
+  <body>
+    <h1 style="display: flex; width: 100%; background-color: beige">
+      Solidjs Pattern!
+    </h1>
+    <h2>Counter: <span id="total">0</span></h2>
+    <button onclick="setCounter(counter() - 1)">-</button>
+    <button onclick="setCounter(counter() + 1)">+</button>
+
+    <script src="solidjs.js"></script>
+    <script>
+      const total = document.querySelector('#total');
+      const [counter, setCounter] = createSignal(Number(total.textContent));
+
+      // side effects -> updates the DOM, everytime counter value changes
+      createEffect(() => {
+        console.log(
+          '🚀 ~ file: index.html:25 ~ createEffect before updates the DOM',
+          {
+            counter: counter(),
+            textContent: total.textContent,
+          },
+        );
+        total.textContent = counter();
+      });
+    </script>
+  </body>
+</html>
