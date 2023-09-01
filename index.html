@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Observable-ish Values Pattern</title>
+  </head>
+  <body>
+    <h1 style="display: flex; width: 100%">Observable-ish Values Pattern!</h1>
+    <h2>Total: <span id="total">0</span></h2>
+    <button
+      onclick="product({ price: product().price, quantity: product().quantity - 1 })"
+    >
+      -
+    </button>
+    <button
+      onclick="product({ price: product().price, quantity: product().quantity + 1 })"
+    >
+      +
+    </button>
+
+    <script src="ov.js"></script>
+    <script>
+      const product = ov({
+        price: 1_000,
+        quantity: 0,
+      });
+      const total = ov(() => product().price * product().quantity);
+
+      product.subscribe((current) => {
+        document.querySelector('#total').textContent = total();
+      });
+    </script>
+  </body>
+</html>
