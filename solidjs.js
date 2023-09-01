@@ -1,5 +1,5 @@
 /**
- * @typedef {{ execute: () => void }} Observer
+ * @typedef {{ dependencies: Set<Set<Observer>>; execute: () => void }} Observer
  */
 
 /**
@@ -7,7 +7,43 @@
  *
  * @type {Array<Observer>}
  */
-const contexts = [];
+let contexts = [];
+
+/**
+ * Ignores tracking context inside its scope
+ *
+ * @template T
+ * @param {() => T} fn the scope that is out of the tracking context
+ * @returns {T} the return value of `fn`
+ *
+ * @description https://www.solidjs.com/docs/latest/api#untrack
+ */
+function untrack(fn) {
+  // save the previous contexts
+  const prevContext = contexts;
+  // clear contexts
+  contexts = [];
+  // run callback without the contexts
+  const res = fn();
+  // set back the previous contexts
+  contexts = prevContext;
+
+  return res;
+}
+
+/**
+ * clear observer dependencies
+ * ONLY used in createEffect.
+ *
+ * @param {Observer} observer
+ */
+function cleanup(observer) {
+  for (const dep of observer.dependencies) {
+    dep.delete(observer);
+  }
+
+  observer.dependencies.clear();
+}
 
 /**
  * create and register effects
@@ -16,7 +52,9 @@ const contexts = [];
  */
 function createEffect(fn) {
   const effect = {
+    dependencies: new Set(),
     execute() {
+      cleanup(effect);
       contexts.push(effect);
       fn();
       contexts.pop();
@@ -44,8 +82,12 @@ function createSignal(value) {
   const read = () => {
     // get last item
     const observer = contexts[contexts.length - 1];
-    // add effect to cache
-    if (observer) subscriptions.add(observer);
+
+    if (observer) {
+      // add effect to cache
+      subscriptions.add(observer);
+      observer.dependencies.add(subscriptions);
+    }
 
     return value;
   };
@@ -58,7 +100,7 @@ function createSignal(value) {
     value = newValue;
 
     // execute all effects
-    for (const observer of subscriptions) {
+    for (const observer of [...subscriptions]) {
       observer.execute();
     }
   };
