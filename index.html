@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+    <title>String Literal - UI Pattern</title>
+  </head>
+  <body
+    class="w-full min-h-screen flex flex-col justify-center items-center space-y-3"
+  >
+    <h1>String Literal - UI Pattern!</h1>
+    <h2>Todo List</h2>
+
+    <section class="flex space-x-2">
+      <input type="text" name="todo-text" id="todo-text" />
+      <button type="button" onclick="onSubmit(this)">Add Todo</button>
+    </section>
+
+    <!-- todo list goes here -->
+    <section id="todo-list"></section>
+
+    <script src="stringliteral.js"></script>
+    <script>
+      const text = document.querySelector('#todo-text');
+      const list = document.querySelector('#todo-list');
+      let id = 0;
+      let todos = [];
+
+      function renderTodoList() {
+        // re-render todo list component
+        list.innerHTML = TodoListComponent(todos);
+      }
+
+      function addTodo() {
+        const todo = {
+          id: id++,
+          text: text.value,
+        };
+
+        todos.push(todo);
+        renderTodoList(todos);
+      }
+
+      /**
+       * @param {MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }} evt
+       */
+      function onSubmit(evt) {
+        addTodo();
+      }
+    </script>
+  </body>
+</html>
