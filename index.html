@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+    <title>Web Component - UI Pattern</title>
+  </head>
+  <body class="bg-white text-black">
+    <h1 class="text-3xl">Web Component - UI Pattern!</h1>
+
+    <theme-text data-theme="light"></theme-text>
+
+    <button type="button" onclick="onToggleTheme(this)">Toggle Theme</button>
+
+    <script src="webcomponent.js"></script>
+    <script>
+      customElements.define('theme-text', ThemeText);
+
+      /**
+       * @param {MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }} evt
+       */
+      function onToggleTheme(evt) {
+        const themeText = document.querySelector('theme-text');
+        const dataTheme = themeText.getAttribute('data-theme');
+
+        themeText.setAttribute(
+          'data-theme',
+          dataTheme === 'light' ? 'dark' : 'light',
+        );
+      }
+    </script>
+  </body>
+</html>
