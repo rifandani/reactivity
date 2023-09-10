@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+    <title>Mutation Observer - UI Pattern</title>
+  </head>
+  <body class="bg-white text-black" data-theme="light">
+    <h1 class="text-3xl">Mutation Observer - UI Pattern!</h1>
+
+    <button type="button" onclick="onToggleTheme(this)">Toggle Theme</button>
+
+    <script src="mutationobserver.js"></script>
+    <script>
+      /**
+       * @param {MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }} evt
+       */
+      function onToggleTheme(evt) {
+        const dataTheme = document.body.getAttribute('data-theme');
+
+        // observe for attributes changes
+        observer.observe(document.body, { attributes: true });
+
+        // mutate "data-theme" attribute
+        document.body.setAttribute(
+          'data-theme',
+          dataTheme === 'light' ? 'dark' : 'light',
+        );
+      }
+    </script>
+  </body>
+</html>
