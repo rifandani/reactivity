@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+    <title>CSS Variables and Calc Functions - UI Pattern</title>
+    <style>
+      @keyframes bounce {
+        from {
+          transform: translateY(0px);
+        }
+        to {
+          /* With the translateY function,
+          positive values move the element down,
+          negative values move the element up. */
+          transform: translateY(calc(var(--bounce-height) * -1));
+        }
+      }
+
+      .box {
+        width: 200px;
+        height: 200px;
+        animation: bounce alternate infinite cubic-bezier(0.2, 0.65, 0.6, 1);
+      }
+      .box.one {
+        --bounce-height: 20px;
+        background-color: aqua;
+        animation-duration: 200ms;
+      }
+      .box.two {
+        --bounce-height: 30px;
+        background-color: blueviolet;
+        animation-duration: 300ms;
+      }
+      .box.three {
+        --bounce-height: 40px;
+        background-color: violet;
+        animation-duration: 400ms;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <h1 class="text-3xl">CSS Variables and Calc Functions - UI Pattern!</h1>
+
+    <section class="mt-20 flex space-x-5">
+      <div class="box one"></div>
+      <div class="box two"></div>
+      <div class="box three"></div>
+    </section>
+  </body>
+</html>
