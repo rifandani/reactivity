@@ -10,15 +10,18 @@
     <h1>PubSub Pattern!</h1>
     <h2>Counter <span id="total">0</span></h2>
     <button onclick="pubsub.publish('decrement')">-</button>
-    <button onclick="pubsub.publish('increment')">+</button>
+    <button onclick="pubsub.publish('increment', 2)">++</button>
 
     <script src="pubsub.js"></script>
     <script>
       const total = document.querySelector('#total');
 
-      pubsub.subscribe('increment', () => {
+      pubsub.subscribe('increment', (data) => {
         // increment
-        total.textContent = Number(total.textContent) + 1;
+        total.textContent = Number(total.textContent) + data;
+      });
+      pubsub.subscribe('increment', (data) => {
+        alert(`increment data => ${data}`);
       });
       pubsub.subscribe('decrement', () => {
         // decrement

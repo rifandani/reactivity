@@ -17,10 +17,6 @@ const pubsub = {
   subscribe(event, callback) {
     if (!this.events[event]) this.events[event] = [];
     this.events[event].push(callback);
-
-    return () => {
-      this.events[event].splice(callback.length - 1, 1);
-    };
   },
   /**
    * same as `dispatchEvent`
