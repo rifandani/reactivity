@@ -104,6 +104,8 @@
       }
 
       function onPlay() {
+        // If you do not check if the animation is already running,
+        // you will double up the speed of the animation because requestAnimationFrame will start to get called twice.
         if (animate === false) {
           animate = true;
           requestAnimationFrame(updateBoxAngle);
@@ -125,6 +127,8 @@
         angle += 1;
         box.style.transform = `rotate(${angle}deg)`;
 
+        // if you want to continue the animation,
+        // you need to call requestAnimationFrame yourself again.
         if (animate === true) {
           requestAnimationFrame(updateBoxAngle);
         }
