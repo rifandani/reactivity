@@ -60,15 +60,23 @@ class ThemeText extends HTMLElement {
   /**
    * Invoked each time one of the custom element's attributes is added, removed, or changed
    * Which attributes to notice change for is specified in a `static get observedAttributes` method
+   *
+   * @param {string} name
+   * @param {string} _oldValue
+   * @param {string} newValue
    */
   attributeChangedCallback(name, _oldValue, newValue) {
     if (name === 'data-theme') {
-      const p = this.shadowRoot.querySelector('p');
-      const span = this.shadowRoot.querySelector('span');
+      const p = this.shadowRoot?.querySelector('p');
+      const span = this.shadowRoot?.querySelector('span');
 
-      p.className =
-        newValue === 'light' ? 'bg-white text-black' : 'bg-black text-white';
-      span.textContent = newValue || '';
+      if (p) {
+        p.className =
+          newValue === 'light' ? 'bg-white text-black' : 'bg-black text-white';
+      }
+      if (span) {
+        span.textContent = newValue || '';
+      }
     }
   }
 }
