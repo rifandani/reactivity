@@ -21,10 +21,16 @@
       const total2 = document.querySelector('#total2');
       const observer = new ObserverAsync();
 
+      /**
+       * @param {HTMLSpanElement} element
+       */
       async function decrement(element) {
         await sleep(1000);
         element.textContent = Number(element.textContent) - 1;
       }
+      /**
+       * @param {HTMLSpanElement} element
+       */
       async function increment(element) {
         await sleep(1000);
         element.textContent = Number(element.textContent) + 1;

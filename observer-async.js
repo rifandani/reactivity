@@ -33,6 +33,7 @@ class ObserverAsync {
   }
 
   /**
+   * a method to remove the observer
    * @template T
    * @param {(data: T) => void} callback
    */
