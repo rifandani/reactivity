@@ -1,10 +1,11 @@
 'use strict';
 
 /**
- * define new key in an object
+ * Adds one or more properties to an object, and/or modifies attributes of existing properties
  *
- * @param {any} object - any object
+ * @param {Record<PropertyKey, any>} object - affected object
  * @param {PropertyKey} key - new object key
+ * @param {any} value - object key initial value
  */
 function defineProperty(object, key, value) {
   Object.defineProperties(object, {
