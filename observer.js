@@ -23,6 +23,7 @@ const observer = Object.freeze({
     observers.push(func);
   },
   /**
+   * a method to remove the observer
    *
    * @param {Observer} func
    */

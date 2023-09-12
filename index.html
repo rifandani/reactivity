@@ -43,6 +43,9 @@
         observer.notify(total2);
         observer.unsubscribe(increment);
       }
+      /**
+       * @param {string} color
+       */
       function handleRecolor(color) {
         observer.subscribe(recolor);
         observer.notify(color);
