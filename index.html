@@ -16,17 +16,27 @@
     <script>
       const total = document.querySelector('#total');
 
-      pubsub.subscribe('increment', (data) => {
-        // increment
-        total.textContent = Number(total.textContent) + data;
-      });
-      pubsub.subscribe('increment', (data) => {
-        alert(`increment data => ${data}`);
-      });
-      pubsub.subscribe('decrement', () => {
-        // decrement
-        total.textContent = Number(total.textContent) - 1;
-      });
+      function logger(data) {
+        console.log(`logger`, data);
+      }
+
+      /**
+       * @param {number} data
+       */
+      function increment(data) {
+        total.textContent = Number(total.textContent) + (data || 1);
+      }
+
+      /**
+       * @param {number} data
+       */
+      function decrement(data) {
+        total.textContent = Number(total.textContent) - (data || 1);
+      }
+
+      pubsub.subscribe('increment', increment);
+      pubsub.subscribe('increment', logger);
+      pubsub.subscribe('decrement', decrement);
     </script>
   </body>
 </html>
