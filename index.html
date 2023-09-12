@@ -24,10 +24,10 @@
       const total = document.querySelector('#total');
       const counterInstance = new Counter();
 
-      counterInstance.subscribe('decrement', () => {
+      counterInstance.subscribe('decrement', (evt) => {
         total.textContent = Number(total.textContent) - 1;
       });
-      counterInstance.subscribe('increment', () => {
+      counterInstance.subscribe('increment', (evt) => {
         total.textContent = Number(total.textContent) + 1;
       });
       counterInstance.subscribe('recolor', (evt) => {
