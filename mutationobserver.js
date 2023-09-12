@@ -7,8 +7,7 @@ const mutationCallback = (mutations) => {
     )
       return;
 
-    /** @type {HTMLElement} */
-    const body = mutation.target;
+    const body = /** @type {HTMLElement} */ (mutation.target);
     const newTheme = body.getAttribute('data-theme'); // new value
 
     body.className =
