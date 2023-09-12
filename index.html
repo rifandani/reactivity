@@ -11,23 +11,23 @@
       Solidjs Pattern!
     </h1>
     <h2>Counter: <span id="total">0</span></h2>
-    <button onclick="setCounter(counter() - 1)">-</button>
-    <button onclick="setCounter(counter() + 1)">+</button>
+    <button onclick="decrement()">-</button>
+    <button onclick="increment()">+</button>
 
     <script src="solidjs.js"></script>
     <script>
       const total = document.querySelector('#total');
       const [counter, setCounter] = createSignal(Number(total.textContent));
 
+      function decrement() {
+        setCounter(counter() - 1);
+      }
+      function increment() {
+        setCounter(counter() + 1);
+      }
+
       // side effects -> updates the DOM, everytime counter value changes
       createEffect(() => {
-        console.log(
-          '🚀 ~ file: index.html:25 ~ createEffect before updates the DOM',
-          {
-            counter: counter(),
-            textContent: total.textContent,
-          },
-        );
         total.textContent = counter();
       });
     </script>
