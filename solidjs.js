@@ -20,13 +20,13 @@ let contexts = [];
  */
 function untrack(fn) {
   // save the previous contexts
-  const prevContext = contexts;
+  const prevContexts = contexts;
   // clear contexts
   contexts = [];
   // run callback without the contexts
   const res = fn();
   // set back the previous contexts
-  contexts = prevContext;
+  contexts = prevContexts;
 
   return res;
 }
