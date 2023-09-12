@@ -22,10 +22,10 @@
     <script>
       const total = document.querySelector('#total');
 
-      window.addEventListener('decrement', () => {
+      window.addEventListener('decrement', (evt) => {
         total.textContent = Number(total.textContent) - 1;
       });
-      window.addEventListener('increment', () => {
+      window.addEventListener('increment', (evt) => {
         total.textContent = Number(total.textContent) + 1;
       });
       window.addEventListener('recolor', (evt) => {
