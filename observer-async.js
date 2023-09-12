@@ -12,13 +12,18 @@ function sleep(ms) {
 
 class ObserverAsync {
   constructor() {
+    /**
+     * @template T
+     * @type {Array<(data: T) => void>}
+     */
     this.observers = [];
   }
 
   /**
    * Subscribe to changes in the data
    *
-   * @param {() => void} callback
+   * @template T
+   * @param {(data: T) => void} callback
    */
   subscribe(callback) {
     if (typeof callback !== 'function') {
@@ -28,8 +33,8 @@ class ObserverAsync {
   }
 
   /**
-   *
-   * @param {() => void} callback
+   * @template T
+   * @param {(data: T) => void} callback
    */
   unsubscribe(callback) {
     [...this.observers].forEach((observer, index) => {
@@ -42,7 +47,8 @@ class ObserverAsync {
   /**
    * notify and wait for all updates to complete
    *
-   * @param {any} value
+   * @template T
+   * @param {T} value
    */
   async notify(value) {
     // Call the subscribed function and wait for it to resolve
