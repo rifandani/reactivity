@@ -11,13 +11,17 @@ const observer = Object.freeze({
    *
    * @param {any} data
    */
-  notify: (data) => observers.forEach((observer) => observer(data)),
+  notify: (data) => {
+    observers.forEach((observer) => observer(data));
+  },
   /**
    * a method in order to add observers to the observers list
    *
    * @param {Observer} func
    */
-  subscribe: (func) => observers.push(func),
+  subscribe: (func) => {
+    observers.push(func);
+  },
   /**
    *
    * @param {Observer} func
