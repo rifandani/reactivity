@@ -17,6 +17,10 @@
     <script src="solidjs.js"></script>
     <script>
       const total = document.querySelector('#total');
+      /**
+       * equivalent in `useState`
+       * const [counter, setCounter] = useState(Number(total.textContent));
+       */
       const [counter, setCounter] = createSignal(Number(total.textContent));
 
       function decrement() {
@@ -26,7 +30,14 @@
         setCounter(counter() + 1);
       }
 
-      // side effects -> updates the DOM, everytime counter value changes
+      /**
+       * side effects -> updates the DOM, everytime counter value changes
+       *
+       * equivalent in `useEffect`
+       * useEffect(() => {
+       *   total.textContent = counter
+       * }, [counter])
+       */
       createEffect(() => {
         total.textContent = counter();
       });
