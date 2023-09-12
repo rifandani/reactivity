@@ -1,4 +1,16 @@
+/**
+ * The Proxy object allows you to create an object that can be used in place of the original object,
+ * but which may redefine fundamental Object operations like getting, setting, and defining properties.
+ * Proxy objects are commonly used to log property accesses, validate, format, or sanitize inputs.
+ *
+ * @template T
+ * @param {T} target - target object that we want to intercept
+ */
 function createProxy(target) {
+  /**
+   * @template T
+   * @type {ProxyHandler<T>}
+   */
   const handler = {
     get: function (target, property) {
       return target[property];

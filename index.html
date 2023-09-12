@@ -25,17 +25,17 @@
         quantity: Number(quantity.textContent),
         total: Number(total.textContent),
       };
-      const proxy = createProxy(product);
+      const productProxy = createProxy(product);
 
       function decrement() {
-        proxy.quantity -= 1;
-        quantity.textContent = proxy.quantity;
-        total.textContent = proxy.total;
+        productProxy.quantity -= 1;
+        quantity.textContent = productProxy.quantity;
+        total.textContent = productProxy.total;
       }
       function increment() {
-        proxy.quantity += 1;
-        quantity.textContent = proxy.quantity;
-        total.textContent = proxy.total;
+        productProxy.quantity += 1;
+        quantity.textContent = productProxy.quantity;
+        total.textContent = productProxy.total;
       }
     </script>
   </body>
